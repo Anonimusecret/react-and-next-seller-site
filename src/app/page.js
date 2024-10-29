@@ -2,8 +2,8 @@ import { requestToBodyStream } from "next/dist/server/body-streams";
 import Image from "next/image";
 
 export default function Main(){
-  let elemsList = [{id: 1, Name: 'first', Description: 'description first'},{id: 2, Name: 'second', Description: 'description second'}];
-    return(
+
+  return(
       <>
     <div
       className="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]"
@@ -17,17 +17,39 @@ export default function Main(){
         }}
       />
     </div>
-    <Table elems={elemsList}/>
+    <Table />
     </>
   )
 }
 
 
-export function Table({elems}){
+export async function Table(){
 
-  let tableElements = elems.map((elem, i) => {
+  let elemsList;
+  let tableElements
 
-    return(  <div className="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50" key={elem.id}>
+  const apiKey = '011ba11bdcad4fa396660c2ec447ef14'
+  let input = {
+    ApiKey: apiKey,
+    MethodName: "OSGetGoodList"
+  }
+
+  let response = await fetch('https://sycret.ru/service/api/api', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8'
+    },
+    body: JSON.stringify(input)
+  });
+  console.log(response)
+  let result = await response.json();
+  elemsList = result.data
+  console.log(elemsList)
+
+
+    tableElements = elemsList.map((elem, i) => {
+
+    return(  <div className="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50" key={elem.ID}>
       <div className="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
         <svg
           className="h-6 w-6 text-gray-600 group-hover:text-indigo-600"
@@ -47,11 +69,11 @@ export function Table({elems}){
       </div>
       <div>
         <a href="/form" className="font-semibold text-gray-900">
-          {elem.Name}
+          {elem.NAME}
           <span className="absolute inset-0" />
         </a>
         <p className="mt-1 text-gray-600">
-          {elem.Description}
+          {elem.DESCRIPTION}
         </p>
       </div>
     </div>)

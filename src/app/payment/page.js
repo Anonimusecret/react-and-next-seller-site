@@ -1,4 +1,4 @@
-'use client';
+
 
 export default function Main(){
     return(<>
@@ -28,7 +28,7 @@ export default function Main(){
     </>)
 }
 
-export function Form(){
+export function Payment({setPage, info}){
   return(
     <>
   <div className="mx-auto max-w-2xl text-center">
@@ -38,7 +38,7 @@ export function Form(){
   </div>
   <button
     className="block w-full rounded-md bg-gray-600 mt-2 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-    onClick={()=>{window.location.href = "/";
+    onClick={()=>{setPage('table')
     }}
   >
     Назад

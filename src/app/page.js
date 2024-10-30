@@ -3,6 +3,7 @@ import Image from "next/image";
 
 
 import { Table } from "./table";
+import { OSSale } from "./OSSale";
 
 export default async function Main(){
 
@@ -41,7 +42,8 @@ export default async function Main(){
         }}
       />
     </div>
-    <Table elemsList={elemsList}/>
+    <Table elemsList={elemsList} OSSale={OSSale}/>
     </>
   )
 }
+

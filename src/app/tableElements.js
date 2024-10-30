@@ -1,7 +1,7 @@
 'use client';
 import {useState} from 'react'
 
-export function TableElements({elemsList, setItemInfo}){
+export function TableElements({elemsList, setItemInfo, setPage}){
 
     let tableElements = elemsList.map((elem, i) => {
     
@@ -26,9 +26,10 @@ export function TableElements({elemsList, setItemInfo}){
           </div>
           <div>
             <a onClick={() => {
-              setItemInfo(elem);
-              window.location.href = "/form"
-              }} className="font-semibold text-gray-900">
+                setItemInfo(elem);
+                setPage('form');
+              }}
+              className="font-semibold text-gray-900">
               {elem.NAME}
               <span className="absolute inset-0" />
             </a>

@@ -31,33 +31,43 @@ export default function Main(){
 export function Form({item, setPage, setInfo}){
 
   function chekForm(form){
-    form.preventdefault
-    let correct = false;
-    let chekname = false;
-    let chekphone = false;
-    let checkMail = false;
+    form.preventDefault()
 
+    let ClientName = document.getElementById('ClientName')
+    let phone = document.getElementById('tel')
+    let email = document.getElementById('email')
 
+    let emailRegEEx = /^[\w]{1}[\w-\.]*@[\w-]+\.[a-z]{2,4}$/i
+    let phoneRegEx = /^[\d\+][\d\(\)\ -]{4,14}\d$/
 
+    let chekname = false; //ClientName.value.length > 0
+    let chekphone = false; //phone.value.match(phoneRegEx).length > 0
+    let checkMail = false; //email.value.match(emailRegEEx).length > 0
+    let formCorrect = false; //formCorrect = chekname && chekphone && checkMail
 
-    correct = chekname && chekphone && checkMail
+    formCorrect = email.value.match(emailRegEEx).length > 0 && phone.value.match(phoneRegEx).length > 0 && ClientName.value.length > 0;
 
-    if(correct){
+    
+
+    if(formCorrect){
 
       let info = item;
 
-      info.ClientName = ClientName;
-      info.phone = phone;
-      info.email = email;
+      
+
+      info.ClientName = ClientName.value;
+      info.phone = phone.value.substring(2);
+      info.email = email.value;
 
       setInfo(info);
-      console.log(info)
-      console.log('наверняка' + item)
+      console.log(info.ClientName)
+      console.log('наверняка' + item.ClientName)
       setPage('payment')
 
     }
     
   }
+
   return(
     <>
 
@@ -70,7 +80,10 @@ export function Form({item, setPage, setInfo}){
       {item.NAME}
     </p>
   </div>
-  <form onSubmit={(form) => {chekForm(form)}} className="mx-auto mt-16 max-w-xl sm:mt-20">
+  <form onSubmit={(form) => {
+    form.preventDefault()
+    chekForm(form)
+    }} className="mx-auto mt-16 max-w-xl sm:mt-20">
     <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
         
       <div className="sm:col-span-2"> {/**<Name /> **/}
@@ -90,7 +103,7 @@ export function Form({item, setPage, setInfo}){
           />
         </div>
       </div>
-      <div className="sm:col-span-2"> {/**<Number /> TODO: mask**/}
+      <div className="sm:col-span-2"> {/**<Number /> **/}
         <label
           htmlFor="phone-number"
           className="block text-sm font-semibold leading-6 text-gray-900"
@@ -102,13 +115,13 @@ export function Form({item, setPage, setInfo}){
           <input
             type="tel"
             name="phone-number"
-            id="phone-number"
+            id="tel"
             autoComplete="tel"
             className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 "
             required
             placeholder="+7 (999) 999-99-99"
-            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
             inputMode="tel"
+            maxLength="12"
           />
         </div>
       </div>

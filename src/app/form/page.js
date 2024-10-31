@@ -144,7 +144,7 @@ export function Form({item, setPage, setInfo}){
 
     </div>
   </form>
-  <BackButton />
+  <BackButton setPage={setPage}/>
     </>
   )
 }

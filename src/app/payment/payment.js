@@ -25,15 +25,14 @@ export function Payment({setPage, info}){
           UseDelivery: 0,
         }
       
-        /**  let response = await fetch('https://sycret.ru/service/api/api', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json;charset=utf-8'
-          },
-          body: JSON.stringify(input)
-        }); 
-        console.log(response)
-        let result = await response.json();*/
+          let response = await fetch('https://sycret.ru/service/api/api', {
+            mode: 'no-cors',
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(input)
+          }); 
 
       }
 
@@ -51,7 +50,7 @@ export function Payment({setPage, info}){
       Покупка
     </h2>
   </div>
-  
+
   <button
     className="block w-full rounded-md bg-gray-600 mt-2 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
     onClick={()=>{setPage('table')

@@ -1,17 +1,14 @@
 'use client';
 import { TableElements } from "./tableElements";
-import {useState, useEffect } from 'react'
+import { useState } from 'react'
 
-import { Form } from "./form/page";
-import { Payment } from "./payment/page";
+import { Form } from "./form/form";
+import { Payment } from "./payment/payment";
 
 
 export function Table({elemsList}){
     const [itemInfo, setItemInfo] = useState(null)
     const [page, setPage] = useState('table')
-    const [isSent, setIsSent] = useState(false)
-
-
 
     if(page == 'table'){
         return(  

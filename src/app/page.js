@@ -23,10 +23,10 @@ export default async function Main(){
     },
     body: JSON.stringify(input)
   });
-  console.log(response)
+
   let result = await response.json();
   elemsList = result.data
-  console.log(elemsList)
+
 
   return(
       <>

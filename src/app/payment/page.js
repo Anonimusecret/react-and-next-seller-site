@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 
 export default function Main(){
     return(<>
@@ -28,13 +28,16 @@ export default function Main(){
     </>)
 }
 
-export function Payment({setPage, info, isSent, setIsSent}){
+export function Payment({setPage, info}){
+  //const [isSent, setIsSent] = useState(false)
+
+  let send = false
   
   useEffect(() => {
     console.log('OSSale активировалось')
     console.log('info' + info.ID)
 
-    let send = isSent
+    //let send = isSent
     
     async function OSSale(info) {
       console.log('OSSale запустилось')
@@ -66,7 +69,7 @@ export function Payment({setPage, info, isSent, setIsSent}){
         }); 
         console.log(response)
         let result = await response.json();*/
-        setIsSent(true)
+        //setIsSent(true)
         console.log(send)
       }
       //OSSale(info); //TODO: Сначала дописать сбор данных, потом уже тестить
